@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block style_container %}
+
+    <link rel="stylesheet" href="{{ url_for('static', path='css/base.css') }}"> 
+    <link rel="stylesheet" href="{{ url_for('static', path='css/get_pedido.css') }}">  
+
+{% endblock %}
+
+{% block content %} 
+
+    <main>
+
+        <header>
+            <a href="{{ url_for('list_pedido') }}">Pedidos</a>
+        </header>
+
+        <section>
+
+            <article class="order-container">
+
+                <div class="order-feature">
+                    <strong>Solicitado:</strong> 
+                    <p> {{pedido.created_at | date_format }} </p>
+                </div>
+                <div class="order-feature">
+                    <strong>Pagamento:</strong>
+                    <p>{{pedido.status.value | capitalize }}</p>
+                </div>
+
+                {% if pedido.link_pagamento and pedido.status.value == 'pendente' %}
+                    <a href="{{ pedido.link_pagamento}}" class="order-payment-button">Pagar</a>
+
+                {% elif pedido.status.value == 'pago' %}
+                
+                    <p class="order-message">Pago</p>
+
+                {% else %}
+                
+                    <p class="order-message">Cancelado</p>
+
+                {% endif %}
+
+            </article>
+
+        
+
+        </section>
+
+    </main>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+
+{% block style_container %}
+
+    <link rel="stylesheet" href="{{ url_for('static', path='css/list_produto.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/base.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<main>
+
+    <div class="creation-product-container">
+
+        <form id="form-creation-product" creation_url="{{ url_for('add_produto') }}" method="post">
+            <label for="">
+                <strong>Nome:</strong>
+                <input type="text" name="nome">
+            </label>
+
+            <label for="">
+                <strong>Preço:</strong>
+                <input type="number" name="preco" step="0.01">
+            </label>
+
+            <label for="">
+                <strong>Imagem:</strong>
+                <input type="file" name="image">
+            </label>
+
+            <button type="submit">Criar</button>
+        </form>
+
+    </div>
+
+    <header>
+        <a href="{{ url_for('list_pedido') }}">Pedidos</a>
+        <button id="add-produto-button">novo produto</button>
+    </header>
+
+    <section>
+
+        {% for produto in produtos%}
+
+        <a href="{{ url_for('get_produto', produto_id=produto.id) }}" class="product-item">
+
+            <img src="{{ url_for('get_img', produto_id=produto.id) }}" alt="imagem do produto: {{produto.nome}}">
+
+            <div class="product-features">
+                <div class="product-feature-element">
+                    <strong>Nome</strong>
+                    <p> {{produto.nome}} </p>
+                </div>
+                <div class="product-feature-element">
+                    <strong>Preço</strong>
+                    <p>R$ {{produto.preco}}</p>
+                </div>
+
+            </div>
+
+        </a>
+
+        {% endfor %}
+
+    </section>
+
+</main>
+
+<script src="{{ url_for('static', path='js/list_produto.js' ) }}"></script>
+{% endblock %}

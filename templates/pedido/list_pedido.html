@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block style_container %}
+
+    <link rel="stylesheet" href="{{ url_for('static', path='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/list_pedido.css') }}">
+
+{% endblock %}
+
+{% block content %} 
+
+    <main>
+
+        <header>
+            <a href="{{ url_for('list_produto') }}">Produtos</a>
+        </header>
+
+        <section>
+
+            {% for pedido in pedidos%}
+
+                <a  href="{{ url_for('get_pedido', pedido_id=pedido.id) }}" class="order-item">
+
+                    <div class="order-feature">
+                        <strong>Solicitado:</strong> 
+                        <p> {{pedido.created_at | date_format }} </p>
+                    </div>
+                    <div class="order-feature">
+                        <strong>Pagamento:</strong>
+                        <p>{{pedido.status.value | capitalize }}</p>
+                    </div>
+
+                </a>
+
+            {% endfor %}
+
+        </section>
+
+    </main>
+{% endblock %}

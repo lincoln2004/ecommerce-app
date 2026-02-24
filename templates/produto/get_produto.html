@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block style_container %}
+
+    <link rel="stylesheet" href="{{ url_for('static', path='css/get_produto.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/base.css') }}">
+
+{% endblock %}
+
+{% block content %} 
+
+    <main>
+
+        <header>
+            <a href="{{ url_for('list_produto') }}">Voltar</a>
+        </header>
+
+        <section>
+
+            <img src="{{ url_for('get_img', produto_id=produto.id) }}" alt="imagem do produto: {{ produto.nome }}">            
+
+            <div class="product-details">
+
+                <div class="product-detail-element">
+                    <strong>Nome</strong>
+                    <p>{{ produto.nome }}</p>
+                </div>
+                
+                <div class="product-detail-element">
+                    <strong>Preço</strong>
+                    <p>{{ produto.preco }}</p>
+                </div>
+
+            </div>
+
+            <div class="order-box">
+                <Label>
+                    <strong>Quantidade:</strong>
+                    <input type="number" name="quantity" id="quantity-item-input" value="1" min="1">
+                </Label>
+                <button id="item-order-but">Fazer Pedido</button>
+                <button id="item-purchase-but">Comprar agora</button>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+
+        const pedido_url_base = "{{ url_for('novo_pedido', produto_id=produto.id) | safe }}"
+
+    </script>
+
+    <script src="{{ url_for('static', path='js/get_produto.js') }}"></script>
+{% endblock %}
