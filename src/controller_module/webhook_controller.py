@@ -53,7 +53,7 @@ async def webhook(req: Request, db: Session = Depends(get_db)):
     except Exception:
         return JSONResponse(content={"status": "error"}, status_code=400)
     
-    type_event = data.get('type')
+    type_event = data.get('type') or data.get('topic')
     
     # O MP envia o ID dentro de 'data', mas às vezes o campo pode variar 
     # dependendo da versão da API. O padrão atual é este:
