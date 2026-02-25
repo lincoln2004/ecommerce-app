@@ -53,7 +53,7 @@ async def webhook(req: Request, db: Session = Depends(get_db)):
     except Exception:
         return JSONResponse(content={"status": "error"}, status_code=400)
     
-    type_event = data.get('type') or req.query_params.get('topic')
+    type_event = data.get('type') or req.query_params.get('topic') or req.query_params.get('type')
     
     # O MP envia o ID dentro de 'data', mas às vezes o campo pode variar 
     # dependendo da versão da API. O padrão atual é este:
@@ -63,6 +63,8 @@ async def webhook(req: Request, db: Session = Depends(get_db)):
         id_pagamento = data.get('data', {}).get('id') or req.query_params.get('data.id') or req.query_params.get('id')
         signature = req.headers.get('x-signature')
         x_request_id = req.headers.get('x-request-id')
+        
+        print(f'event:{type_event} , id:{id_pagamento}\n\n')
     
         if not verify_mp_signature(x_request_id, signature, id_pagamento, os.environ.get('MP_WEBHOOK_SIGNATURE')):
             return JSONResponse(content={"status": "error"}, status_code=400)
