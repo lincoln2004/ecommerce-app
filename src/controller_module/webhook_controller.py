@@ -30,6 +30,8 @@ def verify_mp_signature(x_request_id, x_signature, resource_id, secret_key):
         # 2. Montar o "manifesto" (a string que será validada)
         # O formato exigido pelo Mercado Pago é: "id:[ID];request-id:[TS];"
         manifest = f"id:{resource_id};request-id:{x_request_id};ts:{ts};"
+        
+        print(f'manifest: {manifest}')
 
         # 3. Gerar o HMAC SHA256 usando sua Secret Key
         hmac_obj = hmac.HMAC(
@@ -38,6 +40,9 @@ def verify_mp_signature(x_request_id, x_signature, resource_id, secret_key):
             hashlib.sha256
         )
         signature_generated = hmac_obj.hexdigest()
+        
+        print("gerado:", signature_generated)
+        print("recebido:", v1_received)
 
         # 4. Comparar as assinaturas
         return hmac.compare_digest(signature_generated, v1_received)
