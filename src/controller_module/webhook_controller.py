@@ -53,14 +53,14 @@ async def webhook(req: Request, db: Session = Depends(get_db)):
     except Exception:
         return JSONResponse(content={"status": "error"}, status_code=400)
     
-    type_event = data.get('type') or data.get('topic')
+    type_event = data.get('type') or req.query_params.get('topic')
     
     # O MP envia o ID dentro de 'data', mas às vezes o campo pode variar 
     # dependendo da versão da API. O padrão atual é este:
-    if type_event == 'payment':
+    if type_event in ('payment', 'merchant_order'):
         
         
-        id_pagamento = data.get('data', {}).get('id')
+        id_pagamento = data.get('data', {}).get('id') or req.query_params.get('data.id') or req.query_params.get('id')
         signature = req.headers.get('x-signature')
         x_request_id = req.headers.get('x-request-id')
     
