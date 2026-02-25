@@ -32,7 +32,7 @@ def verify_mp_signature(x_request_id, x_signature, resource_id, secret_key):
         manifest = f"id:{resource_id};request-id:{x_request_id};ts:{ts};"
 
         # 3. Gerar o HMAC SHA256 usando sua Secret Key
-        hmac_obj = hmac.new(
+        hmac_obj = hmac.HMAC(
             secret_key.encode('utf-8'), 
             manifest.encode('utf-8'), 
             hashlib.sha256
