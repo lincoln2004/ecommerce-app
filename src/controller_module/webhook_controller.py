@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, Request
 from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
-from src.data_module.settlement_data_module import get_db
+
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -9,7 +9,9 @@ load_dotenv()
 import os 
 import requests
 
-from src.data_module.models.pedido import Pedido, PedidoStatusEnum
+from src.service_module.pedido_service import PedidoService
+from src.data_module.models.pedido import PedidoStatusEnum
+from src.data_module.settlement_data_module import get_db
 
 router = APIRouter()
 
@@ -48,7 +50,7 @@ async def webhook(req: Request, db: Session = Depends(get_db)):
 
                 if pedido_id:
                     # Busca o pedido no banco
-                    pedido = db.query(Pedido).filter(Pedido.id == pedido_id).first()
+                    pedido = PedidoService.get_pedido(db, pedido_id)
                     
                     if pedido:
                         # Evita atualizar se o pedido já estiver pago (Idempotência)
