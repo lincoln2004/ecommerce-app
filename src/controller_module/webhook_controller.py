@@ -13,43 +13,6 @@ from src.data_module.models.pedido import Pedido, PedidoStatusEnum
 
 router = APIRouter()
 
-import hmac
-import hashlib
-
-def verify_mp_signature(x_request_id, x_signature, resource_id, secret_key):
-    
-    if not x_signature or not resource_id or not secret_key:
-        return False
-    try:
-        # 1. Separar o ts e o v1 do header x-signature
-        # Exemplo de header: "ts=123456789,v1=f6e8..."
-        parts = {part.split('=')[0]: part.split('=')[1] for part in x_signature.split(',')}
-        ts = parts.get('ts')
-        v1_received = parts.get('v1')
-
-        # 2. Montar o "manifesto" (a string que será validada)
-        # O formato exigido pelo Mercado Pago é: "id:[ID];request-id:[TS];"
-        manifest = f"id:{resource_id};request-id:{x_request_id};ts:{ts};"
-        
-        print(f'manifest: {manifest}')
-
-        # 3. Gerar o HMAC SHA256 usando sua Secret Key
-        hmac_obj = hmac.HMAC(
-            secret_key.encode('utf-8'), 
-            manifest.encode('utf-8'), 
-            hashlib.sha256
-        )
-        signature_generated = hmac_obj.hexdigest()
-        
-        print("gerado:", signature_generated)
-        print("recebido:", v1_received)
-
-        # 4. Comparar as assinaturas
-        return hmac.compare_digest(signature_generated, v1_received)
-        
-    except Exception as e:
-        print(f"Erro na validação: {e}")
-        return False
 
 @router.post('/webhook')
 async def webhook(req: Request, db: Session = Depends(get_db)):
@@ -66,13 +29,6 @@ async def webhook(req: Request, db: Session = Depends(get_db)):
         
         
         id_pagamento = data.get('data', {}).get('id') or req.query_params.get('data.id') or req.query_params.get('id')
-        signature = req.headers.get('x-signature')
-        x_request_id = req.headers.get('x-request-id')
-        
-        print(f'event:{type_event} , id:{id_pagamento}\n\n')
-    
-        if not verify_mp_signature(x_request_id, signature, id_pagamento, os.environ.get('MP_WEBHOOK_SIGNATURE')):
-            return JSONResponse(content={"status": "error"}, status_code=400)
         
         if not id_pagamento:
             return {"status": "ignored", "reason": "no id found"}
