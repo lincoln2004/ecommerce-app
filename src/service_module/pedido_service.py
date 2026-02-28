@@ -81,7 +81,7 @@ class PedidoService:
         if not pedido_id: return 
         
         try:
-            return  db.query(Pedido).filter( Pedido.id == pedido_id).first()
+            return  db.query(Pedido).filter( Pedido.id == int(pedido_id)).first()
         except:
             return
         
@@ -96,9 +96,9 @@ class PedidoService:
     @staticmethod    
     def pagar_pedido(db: Session, pedido_id: str, status: str):    
         
-        if not pedido_id or not isinstance(pedido_id, str) or not status or not isinstance(status, str): return 
+        if not pedido_id or not isinstance(pedido_id, (str,int)) or not status or not isinstance(status, str): return 
         
-        pedido = PedidoService.get_pedido(db, pedido_id)
+        pedido = PedidoService.get_pedido(db, int(pedido_id))
         
         if not pedido: return 
         
