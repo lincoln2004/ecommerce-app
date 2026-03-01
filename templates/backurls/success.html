@@ -1,13 +1,26 @@
 {% extends "base.html" %}
 
+{% block style_container %}
+
+    <link rel="stylesheet" href="{{ url_for('static', path='css/backurls.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/base.css') }}">
+
+{% endblock %}
+
 {% block content %}
 
     <main>
+
+        <header>
+            <a href="{{ url_for('list_produto') }}">Voltar</a>
+        </header>
 
         <article>
             <p>
                 Payment completed successfully. Thank you for your purchase
             </p>
+
+            <input type="hidden" data-status="success">
         </article>
 
     </main>

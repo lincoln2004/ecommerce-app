@@ -1,13 +1,26 @@
 {% extends "base.html" %}
 
+{% block style_container %}
+
+    <link rel="stylesheet" href="{{ url_for('static', path='css/backurls.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/base.css') }}">
+
+{% endblock %}
+
 {% block content %}
 
     <main>
+
+        <header>
+            <a href="{{ url_for('list_produto') }}">Voltar</a>
+        </header>
 
         <article>
             <p>
                 Payment failed. The transaction was rejected or cancelled during the process
             </p>
+
+            <input type="hidden" data-status="failure">
         </article>
 
     </main>

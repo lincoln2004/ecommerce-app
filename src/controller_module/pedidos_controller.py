@@ -4,7 +4,6 @@ from fastapi.responses import RedirectResponse
 from dotenv import load_dotenv
 load_dotenv()
 
-from datetime import datetime
 from sqlalchemy.orm import Session
 
 from src.data_module.settlement_data_module import get_db

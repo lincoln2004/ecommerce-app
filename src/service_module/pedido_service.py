@@ -46,7 +46,8 @@ class PedidoService:
                     "installments": 1
                 },
                 "items": [produto.preference_formated(quantity)],
-                "external_reference": pedido_id # Vital para o Webhook!
+                "external_reference": pedido_id,
+                "auto_return": "approved"
             }
         
         
