@@ -3,7 +3,7 @@
 This project is a functional e-commerce platform that simulates a complete online shopping experience. It was built with a strong focus on usability, responsiveness, and state management, allowing users to browse products, manage a shopping cart, and view item details dynamically.
 
 | Path | Description | 
-| :--- | :--- | :--- |
+| :--- | :--- | 
 | `/product` | Product listing and item details | 
 | `/order` | Checkout summary and order finalization | 
 | `/webhook` | API endpoint for payment notifications | 
