@@ -1,15 +1,15 @@
-# Ecommerce App - 🏗️ *In progress*
+# Ecommerce App 
 
 This project is a functional e-commerce platform that simulates a complete online shopping experience. It was built with a strong focus on usability, responsiveness, and state management, allowing users to browse products, manage a shopping cart, and view item details dynamically.
 
 | Path | Description | Status |
 | :--- | :--- | :--- |
 | `/product` | Product listing and item details | ✅ Completed |
-| `/order` | Checkout summary and order finalization | 🚧 In Progress |
-| `/webhook` | API endpoint for payment notifications | 🚧 In Progress |
-| `/success` | Confirmation page for approved payments | 🚧 In Progress |
-| `/failure` | Notification page for declined or failed payments | 🚧 In Progress |
-| `/pending` | Information for payments awaiting processing | 🚧 In Progress |
+| `/order` | Checkout summary and order finalization | ✅ Completed |
+| `/webhook` | API endpoint for payment notifications | ✅ Completed |
+| `/success` | Confirmation page for approved payments | ✅ Completed |
+| `/failure` | Notification page for declined or failed payments | ✅ Completed |
+| `/pending` | Information for payments awaiting processing | ✅ Completed |
 
 ## 💡 Features
 
