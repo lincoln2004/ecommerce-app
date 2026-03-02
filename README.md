@@ -2,14 +2,14 @@
 
 This project is a functional e-commerce platform that simulates a complete online shopping experience. It was built with a strong focus on usability, responsiveness, and state management, allowing users to browse products, manage a shopping cart, and view item details dynamically.
 
-| Path | Description | Status |
+| Path | Description | 
 | :--- | :--- | :--- |
-| `/product` | Product listing and item details | ✅ Completed |
-| `/order` | Checkout summary and order finalization | ✅ Completed |
-| `/webhook` | API endpoint for payment notifications | ✅ Completed |
-| `/success` | Confirmation page for approved payments | ✅ Completed |
-| `/failure` | Notification page for declined or failed payments | ✅ Completed |
-| `/pending` | Information for payments awaiting processing | ✅ Completed |
+| `/product` | Product listing and item details | 
+| `/order` | Checkout summary and order finalization | 
+| `/webhook` | API endpoint for payment notifications | 
+| `/success` | Confirmation page for approved payments | 
+| `/failure` | Notification page for declined or failed payments | 
+| `/pending` | Information for payments awaiting processing | 
 
 ## 💡 Features
 
