@@ -51,3 +51,10 @@ To run this project, you will need to create a `.env` file in your root director
 
 > [!WARNING]
 > Keep your `.env` file out of version control. Ensure it is listed in your `.gitignore`.
+
+## 🎥 Video
+
+
+https://github.com/user-attachments/assets/f23e0fb5-05ac-4984-94ff-f887ff39a9c9
+
+
